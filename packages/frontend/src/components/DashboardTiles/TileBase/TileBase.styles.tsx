@@ -1,18 +1,45 @@
 import { Card, Colors, H5 } from '@blueprintjs/core';
 import styled from 'styled-components';
 
+interface HeaderContainerProps {
+    isEditMode: boolean;
+}
+
 export const TileBaseWrapper = styled(Card)`
     height: 100%;
     display: flex;
     flex-direction: column;
+
+    &:hover {
+        box-shadow: 0 0 0 1px ${Colors.GRAY4};
+    }
+
+    &:active,
+    &:focus {
+        box-shadow: 0 0 0 1px ${Colors.BLUE4};
+    }
 `;
 
-export const HeaderContainer = styled.div`
+export const HeaderContainer = styled.div<HeaderContainerProps>`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: baseline;
-    gap: 20px;
+    flex-wrap: wrap;
+    min-height: 80px;
+
+    ${(props) =>
+        props.isEditMode
+            ? `
+      &:hover {
+        cursor: grab;
+      }
+    `
+            : ''}
+    &:active,
+  &:focus {
+        cursor: grabbing;
+    }
 `;
 
 export const TitleWrapper = styled.div`
@@ -28,7 +55,13 @@ export const Title = styled(H5)`
 export const HeaderWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    margin-bottom: 15px;
+    padding-top: 5px;
+`;
+
+export const ButtonsWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
 `;
 
 export const FilterLabel = styled.span`
